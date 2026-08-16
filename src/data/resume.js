@@ -7,7 +7,7 @@ export const personalInfo = {
   name: "Lucas Henrique Lira",
   title: "Desenvolvedor de Software & Analista de Dados",
   tagline: "Transformando dados em decisões e código em soluções.",
-  email: "lucashlirasouza@gmail.com",
+  email: "lucashenriqueliradesouza@gmail.com",
   github: "https://github.com/LucasHLira",
   linkedin: "https://www.linkedin.com/in/lucas-henrique-lira-de-souza-747287225/",
   location: "Santos, São Paulo — Brasil",
