@@ -196,11 +196,46 @@ export const projects = {
       featured: false,
     },
   ],
+  dashboard: [
+    {
+      id: "dashboard-rh",
+      title: "Dashboard RH",
+      description: "Dashboard feito para fins acadêmicos com base de dados fictícia, simulando um Dashboard de Recursos Humanos.",
+      tech: ["Power BI", "Análise de Dados"],
+      category: "dashboard",
+      type: "Dados",
+      link: null,
+      github: "https://github.com/LucasHLira/Dashboard_Aula_RH",
+      featured: true,
+    },
+    {
+      id: "dashboard-transporte",
+      title: "Dashboard de Controle de Transporte",
+      description: "Dashboard para fins acadêmicos, feito com base de dados fictícia, simulando um Dashboard para controle de transporte.",
+      tech: ["Power BI", "Análise de Dados"],
+      category: "dashboard",
+      type: "Dados",
+      link: null,
+      github: "https://github.com/LucasHLira/Dashboard_Controle_de_Transporte",
+      featured: true,
+    },
+    {
+      id: "dashboard-metas",
+      title: "Dashboard de Metas e Resultados",
+      description: "Dashboard para fins acadêmicos, simulando um Dashboard com KPI's e indicadores de metas e resultados.",
+      tech: ["Power BI", "Análise de Dados"],
+      category: "dashboard",
+      type: "Dados",
+      link: null,
+      github: "https://github.com/LucasHLira/Dashboard_Metas_e_Resultados",
+      featured: true,
+    }
+  ],
 };
 
 export const githubStats = {
   username: "LucasHLira",
   avatarUrl: "https://avatars.githubusercontent.com/u/107896027?v=4",
   profileUrl: "https://github.com/LucasHLira",
-  publicRepos: 7,
+  publicRepos: 10,
 };

@@ -6,6 +6,7 @@ import {
   FaFolder,
   FaBriefcase,
   FaGraduationCap,
+  FaChartBar,
 } from 'react-icons/fa';
 
 function ProjectCard({ project }) {
@@ -81,8 +82,7 @@ function ProjectCard({ project }) {
 export default function Projects() {
   const [activeTab, setActiveTab] = useState('professional');
 
-  const currentProjects =
-    activeTab === 'professional' ? projects.professional : projects.academic;
+  const currentProjects = projects[activeTab] || projects.professional;
 
   return (
     <section id="projetos" className="section">
@@ -107,6 +107,13 @@ export default function Projects() {
           >
             <FaGraduationCap aria-hidden="true" /> Acadêmicos
           </button>
+          <button
+            id="tab-dashboard"
+            className={`tab-btn${activeTab === 'dashboard' ? ' active' : ''}`}
+            onClick={() => setActiveTab('dashboard')}
+          >
+            <FaChartBar aria-hidden="true" /> Dashboards
+          </button>
         </div>
 
         {/* Description of tab */}
@@ -118,7 +125,9 @@ export default function Projects() {
         }}>
           {activeTab === 'professional'
             ? '// Projetos desenvolvidos para clientes e uso real'
-            : '// Projetos de estudo, cursos e exercícios práticos'}
+            : activeTab === 'academic'
+            ? '// Projetos de estudo, cursos e exercícios práticos'
+            : '// Análises de dados e dashboards criados em Power BI'}
         </p>
 
         <div className="projects-grid">
