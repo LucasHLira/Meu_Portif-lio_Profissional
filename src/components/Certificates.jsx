@@ -1,50 +1,85 @@
 import { certificates } from '../data/resume';
-import { FaFilePdf, FaExternalLinkAlt, FaAward } from 'react-icons/fa';
+import { FiFileText, FiArrowUpRight, FiCloud } from 'react-icons/fi';
+import useLanguage from '../i18n/useLanguage';
+import { trackSpotlight } from '../lib/spotlight';
+
+function CertPreview({ cert }) {
+  if (cert.type === 'course') {
+    return (
+      <div className="cert-preview cert-preview--course" aria-hidden="true">
+        <div className="course-badge">
+          <FiCloud />
+        </div>
+        <span className="course-provider">Microsoft Azure</span>
+      </div>
+    );
+  }
+
+  if (cert.type === 'pdf') {
+    return (
+      <div className="cert-preview cert-preview--pdf" aria-hidden="true">
+        <div className="cert-doc">
+          <FiFileText />
+          <span>PDF</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="cert-preview">
+      <img src={cert.image} alt="" loading="lazy" />
+    </div>
+  );
+}
 
 export default function Certificates() {
+  const { t, tr } = useLanguage();
+
   return (
     <section id="certificados" className="section">
       <div className="container">
-        <h2 className="section-heading reveal">
-          <span className="number">04.</span> Certificados
-        </h2>
+        <header className="section-head reveal">
+          <span className="eyebrow">
+            <span className="eyebrow-index">05</span> {t('certificates.eyebrow')}
+          </span>
+          <h2 className="section-title">
+            {t('certificates.title')} <em>{t('certificates.titleEm')}</em>
+          </h2>
+        </header>
 
-        <div className="cert-grid">
-          {certificates.map((cert) => (
-            <div className="cert-card reveal" key={cert.id}>
-              <div className="cert-image-container">
-                {cert.type === 'pdf' ? (
-                  <div className="cert-pdf-placeholder">
-                    <FaFilePdf className="pdf-icon" />
-                    <span>Documento PDF</span>
-                  </div>
-                ) : (
-                  <img src={cert.image} alt={cert.title} className="cert-image" loading="lazy" />
-                )}
-                
-                <div className="cert-overlay">
-                  <a
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cert-view-btn"
-                  >
-                    Visualizar <FaExternalLinkAlt />
-                  </a>
+        <div className="certs-grid">
+          {certificates.map((cert, i) => {
+            const isCourse = cert.type === 'course';
+            return (
+              <a
+                key={cert.id}
+                href={tr(cert.link)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`cert-card spotlight${isCourse ? ' cert-card--featured' : ''} reveal`}
+                style={{ '--d': `${i * 70}ms` }}
+                onPointerMove={trackSpotlight}
+              >
+                <CertPreview cert={cert} />
+
+                <div className="cert-body">
+                  {cert.inProgress && (
+                    <span className="cert-status">
+                      <i aria-hidden="true" /> {t('certificates.inProgress')}
+                    </span>
+                  )}
+                  <h3 className="cert-title">{tr(cert.title)}</h3>
+                  <p className="cert-issuer">{tr(cert.issuer)}</p>
+                  {cert.details && <p className="cert-details">{tr(cert.details)}</p>}
+                  <span className="cert-open">
+                    {isCourse ? t('certificates.viewCourse') : t('certificates.view')}
+                    <FiArrowUpRight aria-hidden="true" />
+                  </span>
                 </div>
-              </div>
-              
-              <div className="cert-content">
-                <div className="cert-icon-wrapper">
-                  <FaAward className="cert-award-icon" />
-                </div>
-                <div>
-                  <h3 className="cert-title">{cert.title}</h3>
-                  <p className="cert-issuer">{cert.issuer}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

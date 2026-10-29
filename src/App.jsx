@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Marquee from './components/Marquee';
 import About from './components/About';
+import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Certificates from './components/Certificates';
-import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollProgress from './components/ScrollProgress';
 import useTheme from './hooks/useTheme';
-import './index.css';
 
-// Global observer that watches ALL .reveal elements added to the DOM
+/**
+ * Observer global de reveal: adiciona .visible a todo .reveal que entra na tela.
+ * O MutationObserver cobre elementos montados depois (ex.: troca de aba em Projetos).
+ * O atraso individual vem da variável CSS --d no próprio elemento.
+ */
 function useGlobalReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,7 +28,7 @@ function useGlobalReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
     );
 
     const observeAll = () => {
@@ -49,14 +54,16 @@ function App() {
 
   return (
     <>
+      <ScrollProgress />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main id="content">
         <Hero />
+        <Marquee />
         <About />
+        <Projects />
         <Skills />
         <Experience />
         <Certificates />
-        <Projects />
         <Contact />
       </main>
       <Footer />

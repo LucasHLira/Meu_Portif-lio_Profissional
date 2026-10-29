@@ -1,81 +1,126 @@
 import { personalInfo } from '../data/resume';
-import { FiChevronRight } from 'react-icons/fi';
+import {
+  FiCode,
+  FiBarChart2,
+  FiMapPin,
+  FiBookOpen,
+  FiBriefcase,
+  FiCloud,
+  FiCheckCircle,
+} from 'react-icons/fi';
+import useCounter from '../hooks/useCounter';
+import useLanguage from '../i18n/useLanguage';
+import { trackSpotlight } from '../lib/spotlight';
+import RichText from './RichText';
+
+const FOCUS_ICONS = [FiCode, FiBarChart2];
+
+const NOW_ITEMS = [
+  { key: 'job', Icon: FiBriefcase },
+  { key: 'study', Icon: FiBookOpen },
+  { key: 'cloud', Icon: FiCloud },
+  { key: 'status', Icon: FiCheckCircle, isStatus: true },
+];
+
+function StatCard({ number, label }) {
+  // Separa número e sufixo (ex.: "3+" → 3 e "+", "4º" → 4 e "º", "4th" → 4 e "th")
+  const match = String(number).match(/^(\d+)(.*)$/);
+  const numVal = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? match[2] : '';
+
+  const ref = useCounter(numVal, 1200);
+
+  return (
+    <div>
+      <span className="stat-value">
+        <span ref={ref}>0</span>
+        {suffix && <span className="stat-suffix">{suffix}</span>}
+      </span>
+      <span className="stat-label">{label}</span>
+    </div>
+  );
+}
 
 export default function About() {
+  const { t, tr } = useLanguage();
+
   return (
     <section id="sobre" className="section">
       <div className="container">
-        <h2 className="section-heading reveal">
-          <span className="number">01.</span> Sobre Mim
-        </h2>
+        <header className="section-head reveal">
+          <span className="eyebrow">
+            <span className="eyebrow-index">01</span> {t('about.eyebrow')}
+          </span>
+          <h2 className="section-title">
+            {t('about.title')} <em>{t('about.titleEm')}</em>
+          </h2>
+        </header>
 
-        <div className="about-grid">
-          <div className="about-text reveal">
-            <p>
-              Tenho 19 anos e estou cursando o{' '}
-              <span className="accent">4º Semestre de Análise e Desenvolvimento de Sistemas
-              na UNIMES</span> (Universidade Metropolitana de Santos). Já fiz parte do{' '}
-              <span className="accent">BTP — Brasil Terminal Portuário</span>, onde atuei
-              na área de TI, o que despertou minha paixão por tecnologia.
-            </p>
-            <p>
-              Minha trajetória combina experiência prática em comércio exterior com uma
-              transição consistente para a área de desenvolvimento de software — construindo
-              projetos web reais com{' '}
-              <span className="accent">JavaScript, Node.js e React</span>, além de análise de
-              dados com <span className="accent">SQL, Power BI e Excel</span>.
-            </p>
-            <p>
-              Sou uma pessoa analítica e curiosa, que acredita no aprendizado contínuo.
-              Já desenvolvi projetos profissionais para clientes reais — desde landing pages
-              a portfólios completos — todos publicados e online.
-            </p>
-
-            <div style={{ marginTop: 'var(--space-xl)' }}>
-              <p style={{ color: 'var(--clr-text-muted)', marginBottom: 'var(--space-sm)', fontSize: '0.875rem' }}>
-                Tecnologias que uso atualmente:
+        <div className="bento">
+          <article className="card spotlight bento-bio reveal" onPointerMove={trackSpotlight}>
+            <span className="card-label">{t('about.who')}</span>
+            {tr(personalInfo.bio).map((paragraph, i) => (
+              <p key={i}>
+                <RichText text={paragraph} />
               </p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-sm)', maxWidth: '340px' }}>
-                {['JavaScript (ES6+)', 'Node.js & Express', 'React & Vite', 'SQL & Power BI', 'TypeScript', 'Git & GitHub'].map((tech) => (
-                  <div
-                    key={tech}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      color: 'var(--clr-text-muted)',
-                      fontSize: '0.875rem',
-                      fontFamily: 'var(--font-mono)',
-                    }}
-                  >
-                    <FiChevronRight
-                      aria-hidden="true"
-                      style={{ color: 'var(--clr-accent)', flexShrink: 0 }}
-                    />
-                    {tech}
-                  </div>
-                ))}
-              </div>
+            ))}
+          </article>
+
+          <figure className="card bento-photo reveal" style={{ '--d': '80ms' }}>
+            <img src={personalInfo.photoUrl} alt={t('about.photoAlt')} loading="lazy" />
+            <figcaption className="photo-caption">
+              <FiMapPin aria-hidden="true" /> Santos, SP
+            </figcaption>
+          </figure>
+
+          <div className="card spotlight bento-stats reveal" onPointerMove={trackSpotlight}>
+            <span className="card-label">{t('about.numbers')}</span>
+            <div className="stats-grid">
+              {/* key por índice: trocar o idioma não reinicia os contadores */}
+              {t('about.stats').map((s, i) => (
+                <StatCard key={i} number={s.number} label={s.label} />
+              ))}
             </div>
           </div>
 
-          <div className="about-img-wrapper reveal">
-            <div className="about-img">
-              <img
-                src={personalInfo.avatarUrl}
-                alt={`Foto de perfil de ${personalInfo.name}`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: 'var(--radius-lg)',
-                  filter: 'grayscale(20%)',
-                  transition: 'filter 0.3s ease',
-                }}
-                onMouseEnter={(e) => (e.target.style.filter = 'grayscale(0%)')}
-                onMouseLeave={(e) => (e.target.style.filter = 'grayscale(20%)')}
-              />
-            </div>
+          <div
+            className="card spotlight bento-focus reveal"
+            style={{ '--d': '80ms' }}
+            onPointerMove={trackSpotlight}
+          >
+            <span className="card-label">{t('about.focus')}</span>
+            <ul className="focus-list">
+              {t('about.focusItems').map(({ title, text }, i) => {
+                const Icon = FOCUS_ICONS[i];
+                return (
+                  <li className="focus-item" key={i}>
+                    <span className="focus-icon" aria-hidden="true"><Icon /></span>
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{text}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div
+            className="card spotlight bento-now reveal"
+            style={{ '--d': '160ms' }}
+            onPointerMove={trackSpotlight}
+          >
+            <span className="card-label">{t('about.now')}</span>
+            <ul className="now-list">
+              {NOW_ITEMS.map(({ key, Icon, isStatus }) => (
+                <li className={`now-item${isStatus ? ' is-status' : ''}`} key={key}>
+                  <Icon aria-hidden="true" />
+                  <span>
+                    <RichText text={t(`about.nowItems.${key}`)} />
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

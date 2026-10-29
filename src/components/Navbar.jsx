@@ -1,123 +1,94 @@
-import { useState, useEffect } from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { HiSun, HiMoon, HiMenu, HiX } from 'react-icons/hi';
+import { useEffect, useState } from 'react';
+import { FiSun, FiMoon, FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi';
+import useActiveSection from '../hooks/useActiveSection';
+import useLanguage from '../i18n/useLanguage';
+import LanguageSwitcher from './LanguageSwitcher';
+
+const LINKS = [
+  { id: 'sobre', key: 'about' },
+  { id: 'projetos', key: 'projects' },
+  { id: 'habilidades', key: 'skills' },
+  { id: 'experiencia', key: 'experience' },
+];
+
+const SECTION_IDS = ['inicio', ...LINKS.map((l) => l.id), 'certificados', 'contato'];
 
 export default function Navbar({ theme, toggleTheme }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const active = useActiveSection(SECTION_IDS);
 
+  // Fecha o menu mobile com Esc
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
-  const links = [
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Habilidades', href: '#habilidades' },
-    { label: 'Experiência', href: '#experiencia' },
-    { label: 'Certificados', href: '#certificados' },
-    { label: 'Projetos', href: '#projetos' },
-  ];
-
-  const handleNavClick = (href) => {
-    setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const ThemeIcon = theme === 'dark' ? HiSun : HiMoon;
-  const themeLabel = theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro';
+  const close = () => setOpen(false);
+  const ThemeIcon = theme === 'dark' ? FiSun : FiMoon;
+  const themeLabel = theme === 'dark' ? t('theme.toLight') : t('theme.toDark');
 
   return (
-    <>
-      <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
-        <div className="container">
-          <a href="#" className="navbar-logo">LL.</a>
+    <header className="nav">
+      <nav className="nav-pill" aria-label={t('nav.label')}>
+        <a href="#inicio" className="nav-logo" aria-label={t('nav.home')} onClick={close}>
+          LL
+        </a>
 
-          {/* Desktop links */}
-          <div className="navbar-links">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(l.href); }}
-              >
-                {l.label}
-              </a>
-            ))}
+        <div className="nav-links">
+          {LINKS.map((l) => (
             <a
-              href="#contato"
-              className="navbar-cta"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contato'); }}
+              key={l.id}
+              href={`#${l.id}`}
+              className={`nav-link${active === l.id ? ' is-active' : ''}`}
+              aria-current={active === l.id ? 'true' : undefined}
             >
-              Contato
+              {t(`nav.${l.key}`)}
             </a>
+          ))}
+        </div>
 
-            {/* Theme toggle */}
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label={themeLabel}
-              title={themeLabel}
-            >
-              <ThemeIcon size={18} />
-            </button>
-          </div>
-
-          {/* Mobile: theme + hamburger */}
-          <div className="mobile-actions">
-            <button
-              className="theme-toggle navbar-hamburger"
-              onClick={toggleTheme}
-              aria-label={themeLabel}
-              style={{ border: 'none', padding: '0.4rem' }}
-            >
-              <ThemeIcon size={18} />
-            </button>
-            <button
-              className="navbar-hamburger"
-              aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
-              onClick={() => setMobileOpen((v) => !v)}
-            >
-              {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-            </button>
-          </div>
+        <div className="nav-actions">
+          <LanguageSwitcher />
+          <button className="icon-btn" onClick={toggleTheme} aria-label={themeLabel} title={themeLabel}>
+            <ThemeIcon size={17} />
+          </button>
+          <a href="#contato" className="nav-cta">
+            {t('nav.contact')} <FiArrowUpRight aria-hidden="true" />
+          </a>
+          <button
+            className="icon-btn nav-menu-btn"
+            aria-expanded={open}
+            aria-controls="nav-panel"
+            aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <FiX size={19} /> : <FiMenu size={19} />}
+          </button>
         </div>
       </nav>
 
-      {/* Mobile overlay */}
-      <div
-        className={`mobile-nav-overlay${mobileOpen ? ' open' : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
-
-      {/* Mobile nav */}
-      <div className={`mobile-nav${mobileOpen ? ' open' : ''}`}>
-        {links.map((l) => (
+      {/* Painel do menu mobile */}
+      <div id="nav-panel" className={`nav-panel${open ? ' is-open' : ''}`}>
+        {LINKS.map((l, i) => (
           <a
-            key={l.href}
-            href={l.href}
-            onClick={(e) => { e.preventDefault(); handleNavClick(l.href); }}
+            key={l.id}
+            href={`#${l.id}`}
+            className={`nav-panel-link${active === l.id ? ' is-active' : ''}`}
+            onClick={close}
           >
-            {l.label}
+            {t(`nav.${l.key}`)}
+            <span>{String(i + 1).padStart(2, '0')}</span>
           </a>
         ))}
-        <a
-          href="#contato"
-          className="btn btn-primary"
-          onClick={(e) => { e.preventDefault(); handleNavClick('#contato'); }}
-        >
-          Contato
-        </a>
-        <a
-          href="https://github.com/LucasHLira"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-ghost"
-        >
-          <FaGithub /> GitHub
+        <a href="#contato" className="btn btn-primary" onClick={close}>
+          {t('nav.cta')} <FiArrowUpRight className="btn-arrow" aria-hidden="true" />
         </a>
       </div>
-    </>
+    </header>
   );
 }

@@ -1,52 +1,31 @@
 import { personalInfo } from '../data/resume';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
+import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from 'react-icons/fi';
+import useLanguage from '../i18n/useLanguage';
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const year = new Date().getFullYear();
+
   return (
-    <>
-      {/* Sidebar Social (left) */}
-      <div className="sidebar-social">
-        <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <FaGithub />
-        </a>
-        <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <FaLinkedin />
-        </a>
-        <a href={`mailto:${personalInfo.email}`} aria-label="Email">
-          <MdEmail />
-        </a>
-      </div>
+    <footer className="footer">
+      <div className="container footer-inner">
+        <p>© {year} Lucas Henrique Lira · {t('footer.built')}</p>
 
-      {/* Sidebar Email (right) */}
-      <div className="sidebar-email">
-        <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
-      </div>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-social">
-          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
-            <FaGithub />
+        <div className="footer-links">
+          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <FiGithub />
           </a>
-          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
-            <FaLinkedin />
+          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <FiLinkedin />
           </a>
-          <a href={`mailto:${personalInfo.email}`} className="social-link" aria-label="Email">
-            <MdEmail />
+          <a href={`mailto:${personalInfo.email}`} aria-label={t('footer.email')}>
+            <FiMail />
+          </a>
+          <a href="#inicio" className="to-top" aria-label={t('footer.top')}>
+            <FiArrowUp />
           </a>
         </div>
-        <p className="footer-copy">
-          Desenvolvido por{' '}
-          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
-            Lucas Lira
-          </a>
-          {' '}· Inspirado em{' '}
-          <a href="https://brittanychiang.com" target="_blank" rel="noopener noreferrer">
-            Brittany Chiang
-          </a>
-        </p>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 }
