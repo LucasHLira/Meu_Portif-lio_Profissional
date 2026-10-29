@@ -44,7 +44,7 @@ export const translations = {
       title: 'Do comércio exterior',
       titleEm: 'ao código.',
       who: 'Quem sou',
-      photoAlt: 'Foto de Lucas Henrique Lira',
+      photoNav: 'Ver foto {n} de {total}',
       numbers: 'Em números',
       stats: [
         { number: '5', label: 'projetos para clientes' },
@@ -169,7 +169,7 @@ export const translations = {
       title: 'From foreign trade',
       titleEm: 'to code.',
       who: 'Who I am',
-      photoAlt: 'Photo of Lucas Henrique Lira',
+      photoNav: 'Show photo {n} of {total}',
       numbers: 'By the numbers',
       stats: [
         { number: '5', label: 'client projects' },
@@ -294,7 +294,7 @@ export const translations = {
       title: 'Del comercio exterior',
       titleEm: 'al código.',
       who: 'Quién soy',
-      photoAlt: 'Foto de Lucas Henrique Lira',
+      photoNav: 'Ver foto {n} de {total}',
       numbers: 'En números',
       stats: [
         { number: '5', label: 'proyectos para clientes' },

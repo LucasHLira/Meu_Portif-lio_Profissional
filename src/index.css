@@ -947,11 +947,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 28%; /* mantém o rosto no enquadramento */
-  transition: transform 0.8s var(--ease-out);
+  /* Crossfade entre fotos + leve zoom-out na foto ativa */
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.9s ease, transform 6s var(--ease-out);
 }
 
-.bento-photo:hover img { transform: scale(1.04); }
+.bento-photo img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
 
 .photo-caption {
   position: absolute;
@@ -968,6 +973,43 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1px solid var(--line);
   font-size: 0.8rem;
   font-weight: 500;
+}
+
+.photo-dots {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: flex;
+  padding: 3px 5px;
+  border-radius: var(--r-full);
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+}
+
+/* Botão de 24px para toque; o ponto visível é o ::before */
+.photo-dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.photo-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--text-3);
+  transition: width var(--t), background-color var(--t);
+}
+
+.photo-dot:hover::before { background: var(--text); }
+
+.photo-dot.is-active::before {
+  width: 16px;
+  background: var(--accent);
 }
 
 .stats-grid {

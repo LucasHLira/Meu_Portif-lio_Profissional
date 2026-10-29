@@ -2,7 +2,6 @@ import { personalInfo } from '../data/resume';
 import {
   FiCode,
   FiBarChart2,
-  FiMapPin,
   FiBookOpen,
   FiBriefcase,
   FiCloud,
@@ -12,6 +11,7 @@ import useCounter from '../hooks/useCounter';
 import useLanguage from '../i18n/useLanguage';
 import { trackSpotlight } from '../lib/spotlight';
 import RichText from './RichText';
+import PhotoGallery from './PhotoGallery';
 
 const FOCUS_ICONS = [FiCode, FiBarChart2];
 
@@ -66,12 +66,7 @@ export default function About() {
             ))}
           </article>
 
-          <figure className="card bento-photo reveal" style={{ '--d': '80ms' }}>
-            <img src={personalInfo.photoUrl} alt={t('about.photoAlt')} loading="lazy" />
-            <figcaption className="photo-caption">
-              <FiMapPin aria-hidden="true" /> Santos, SP
-            </figcaption>
-          </figure>
+          <PhotoGallery photos={personalInfo.photos} />
 
           <div className="card spotlight bento-stats reveal" onPointerMove={trackSpotlight}>
             <span className="card-label">{t('about.numbers')}</span>

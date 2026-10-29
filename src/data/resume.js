@@ -21,8 +21,31 @@ export const personalInfo = {
     en: "Santos, São Paulo — Brazil",
     es: "Santos, São Paulo — Brasil",
   },
-  photoUrl: "/images/lucas.jpg",
   avatarUrl: "/images/lucas-avatar.jpg",
+  // Galeria do card "Sobre" (alternam sozinhas). `position` = object-position
+  // para manter o rosto no enquadramento. Fotos em 800px de largura.
+  photos: [
+    {
+      src: "/images/lucas.jpg",
+      position: "50% 28%",
+      caption: "Santos, SP",
+      alt: {
+        pt: "Lucas Henrique Lira trabalhando no computador",
+        en: "Lucas Henrique Lira working at his computer",
+        es: "Lucas Henrique Lira trabajando en la computadora",
+      },
+    },
+    {
+      src: "/images/lucas-g4-valley.jpg",
+      position: "50% 20%",
+      caption: "G4 Valley",
+      alt: {
+        pt: "Lucas Henrique Lira no evento G4 Valley",
+        en: "Lucas Henrique Lira at the G4 Valley event",
+        es: "Lucas Henrique Lira en el evento G4 Valley",
+      },
+    },
+  ],
   // Parágrafos do "Sobre". **texto** vira negrito.
   bio: {
     pt: [
