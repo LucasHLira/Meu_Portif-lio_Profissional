@@ -16,5 +16,5 @@
 - [x] Custom useReveal hook for scroll animations
 - [x] SEO meta tags in index.html
 - [x] SVG favicon
-- [/] Verify build compiles with no errors
+- [x] Verify build compiles with no errors
 - [ ] Dev server running at localhost:5173
