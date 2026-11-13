@@ -41,7 +41,9 @@ export default function PhotoGallery({ photos }) {
           key={photo.src}
           src={photo.src}
           alt={tr(photo.alt)}
-          aria-hidden={i !== index || undefined}
+          width="800"
+          height="600"
+          aria-hidden={i !== index ? "true" : undefined}
           className={i === index ? 'is-active' : undefined}
           style={{ objectPosition: photo.position }}
           loading="lazy"

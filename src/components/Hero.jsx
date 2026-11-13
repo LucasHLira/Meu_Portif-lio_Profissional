@@ -1,5 +1,5 @@
 import { personalInfo } from '../data/resume';
-import { FiArrowRight, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { FiArrowRight, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import useLanguage from '../i18n/useLanguage';
 import RichText from './RichText';
 
@@ -67,11 +67,17 @@ export default function Hero() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary btn-icon"
-              aria-label="LinkedIn"
-              title="LinkedIn"
+              className="btn btn-secondary"
             >
-              <FiLinkedin aria-hidden="true" />
+              <FiLinkedin aria-hidden="true" /> LinkedIn
+            </a>
+            <a
+              href={personalInfo.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+            >
+              <FiInstagram aria-hidden="true" /> Instagram
             </a>
           </div>
         </div>

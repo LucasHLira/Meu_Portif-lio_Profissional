@@ -28,7 +28,7 @@ function CertPreview({ cert }) {
 
   return (
     <div className="cert-preview">
-      <img src={cert.image} alt="" loading="lazy" />
+      <img src={cert.image} alt="" width="400" height="300" loading="lazy" />
     </div>
   );
 }

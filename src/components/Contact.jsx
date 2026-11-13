@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { personalInfo } from '../data/resume';
-import { FiArrowUpRight, FiCopy, FiCheck, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { FiArrowUpRight, FiCopy, FiCheck, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import useLanguage from '../i18n/useLanguage';
 
 export default function Contact() {
@@ -55,7 +55,10 @@ export default function Contact() {
             <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="contact-link">
               <FiLinkedin aria-hidden="true" /> LinkedIn
             </a>
-            <span className="contact-link">{personalInfo.email}</span>
+            <a href={personalInfo.instagram} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <FiInstagram aria-hidden="true" /> Instagram
+            </a>
+            <a href={`mailto:${personalInfo.email}`} className="contact-link">{personalInfo.email}</a>
           </div>
         </div>
       </div>

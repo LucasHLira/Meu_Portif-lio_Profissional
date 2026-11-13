@@ -1,5 +1,5 @@
 import { personalInfo } from '../data/resume';
-import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiInstagram, FiMail, FiArrowUp } from 'react-icons/fi';
 import useLanguage from '../i18n/useLanguage';
 
 export default function Footer() {
@@ -17,6 +17,9 @@ export default function Footer() {
           </a>
           <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <FiLinkedin />
+          </a>
+          <a href={personalInfo.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <FiInstagram />
           </a>
           <a href={`mailto:${personalInfo.email}`} aria-label={t('footer.email')}>
             <FiMail />

@@ -1169,16 +1169,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .project-card:hover { transform: translateY(-3px); }
 
-/* Faixas largas: o destaque (1º) e o 4º quando fecha a lista */
+/* Faixas largas: o destaque (1º) e o último quando a contagem é ímpar */
 .projects-grid > .project-card:first-child,
-.projects-grid > .project-card:nth-child(4):last-child {
+.projects-grid > .project-card:nth-child(4):last-child,
+.projects-grid > .project-card:nth-child(even):last-child:not(:first-child) {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1.3fr 1fr;
 }
 
 .projects-grid > .project-card:first-child .project-cover,
-.projects-grid > .project-card:nth-child(4):last-child .project-cover {
+.projects-grid > .project-card:nth-child(4):last-child .project-cover,
+.projects-grid > .project-card:nth-child(even):last-child:not(:first-child) .project-cover {
   aspect-ratio: auto;
   min-height: 380px;
   padding: 2.5rem 2.5rem 0;
@@ -1194,18 +1196,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .projects-grid > .project-card:first-child .project-body,
-.projects-grid > .project-card:nth-child(4):last-child .project-body {
+.projects-grid > .project-card:nth-child(4):last-child .project-body,
+.projects-grid > .project-card:nth-child(even):last-child:not(:first-child) .project-body {
   justify-content: center;
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .projects-grid > .project-card:first-child .project-title,
-.projects-grid > .project-card:nth-child(4):last-child .project-title {
+.projects-grid > .project-card:nth-child(4):last-child .project-title,
+.projects-grid > .project-card:nth-child(even):last-child:not(:first-child) .project-title {
   font-size: clamp(1.5rem, 2.6vw, 2rem);
 }
 
 .projects-grid > .project-card:first-child .project-actions,
-.projects-grid > .project-card:nth-child(4):last-child .project-actions {
+.projects-grid > .project-card:nth-child(4):last-child .project-actions,
+.projects-grid > .project-card:nth-child(even):last-child:not(:first-child) .project-actions {
   margin-top: 0.5rem;
 }
 
@@ -1754,6 +1759,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .cert-card:hover { transform: translateY(-3px); }
+
+/* Último card preenche a coluna vazia quando a grid não fecha */
+.certs-grid > .cert-card:last-child:nth-child(3n - 1) {
+  grid-column: span 2;
+}
 
 .cert-preview {
   position: relative;

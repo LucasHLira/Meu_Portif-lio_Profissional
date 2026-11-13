@@ -16,6 +16,7 @@ export const personalInfo = {
   email: "lucashenriqueliradesouza@gmail.com",
   github: "https://github.com/LucasHLira",
   linkedin: "https://www.linkedin.com/in/lucas-henrique-lira-de-souza-747287225/",
+  instagram: "https://www.instagram.com/dev.lucaslira/",
   location: {
     pt: "Santos, São Paulo — Brasil",
     en: "Santos, São Paulo — Brazil",
