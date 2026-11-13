@@ -1,16 +1,53 @@
-# React + Vite
+# Portfolio — Lucas Henrique Lira
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Portfolio pessoal de Lucas Henrique Lira, Desenvolvedor de Software e Analista de Dados.
 
-Currently, two official plugins are available:
+Site no ar: https://portifolio-lucas-lira.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Secoes do site
 
-## React Compiler
+- **Hero** — apresentacao com animacao de fundo
+- **Marquee** — faixa de tecnologias em movimento
+- **Sobre** — bio e galeria de fotos
+- **Projetos** — abas de projetos academicos e profissionais, com integracao ao GitHub
+- **Habilidades** — barras animadas por categoria
+- **Experiencia** — linha do tempo vertical
+- **Certificados** — certificacoes e cursos
+- **Contato** — formulario e links de redes sociais
+- **Footer** — rodape com links fixos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Idiomas
 
-## Expanding the Oxlint configuration
+O site esta disponivel em tres idiomas: Portugues, English e Espanol. A troca e feita pelo seletor de idioma no cabecalho.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Tecnologias
+
+- [React](https://react.dev) 19
+- [Vite](https://vite.dev) 8
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [OxLint](https://oxc.rs) para linting
+
+## Como rodar
+
+```bash
+npm ci            # instala as dependencias
+npm run dev       # servidor local (localhost:5173)
+npm run build     # gera a pasta dist/ para producao
+npm run lint      # roda o linter (oxlint)
+npm run preview   # pre-visualiza o build de producao
+```
+
+## Estrutura de pastas (src/)
+
+```
+src/
+  assets/        — imagens e icones estaticos
+  components/    — componentes React (Hero, About, Projects, Skills, etc.)
+  data/          — dados do portfolio (resume.js, techIcons.js)
+  hooks/         — hooks customizados (useTheme, useActiveSection, useCounter)
+  i18n/          — internacionalizacao (translations.js, LanguageProvider, useLanguage)
+  lib/           — utilitarios (spotlight.js)
+  App.jsx        — componente raiz
+  main.jsx       — ponto de entrada
+  index.css      — design system (tokens, animacoes, tipografia)
+```
