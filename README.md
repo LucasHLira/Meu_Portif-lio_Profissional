@@ -1,53 +1,53 @@
-# Portfolio — Lucas Henrique Lira
+# Portfólio — Lucas Henrique Lira
 
-Portfolio pessoal de Lucas Henrique Lira, Desenvolvedor de Software e Analista de Dados.
+Portfólio pessoal de Lucas Henrique Lira, Desenvolvedor de Software e Analista de Dados.
 
 Site no ar: https://portifolio-lucas-lira.vercel.app
 
-## Secoes do site
+## Seções do site
 
-- **Hero** — apresentacao com animacao de fundo
-- **Marquee** — faixa de tecnologias em movimento
+- **Início** — apresentação, com animação de entrada
+- **Faixa de tecnologias** — os ícones das tecnologias em movimento
 - **Sobre** — bio e galeria de fotos
-- **Projetos** — abas de projetos academicos e profissionais, com integracao ao GitHub
-- **Habilidades** — barras animadas por categoria
-- **Experiencia** — linha do tempo vertical
-- **Certificados** — certificacoes e cursos
-- **Contato** — formulario e links de redes sociais
-- **Footer** — rodape com links fixos
+- **Projetos** — em três abas: profissionais, acadêmicos e dashboards
+- **Habilidades** — por categoria
+- **Experiência** — a trajetória profissional
+- **Certificados** — certificações e cursos
+- **Contato** — botão de e-mail e links do GitHub e do LinkedIn
+- **Rodapé** — links do GitHub, do LinkedIn e de e-mail, e o botão de voltar ao topo
 
 ## Idiomas
 
-O site esta disponivel em tres idiomas: Portugues, English e Espanol. A troca e feita pelo seletor de idioma no cabecalho.
+O site está em três idiomas: português, inglês e espanhol. A troca é feita pelo seletor de idioma no menu.
 
 ## Tecnologias
 
 - [React](https://react.dev) 19
 - [Vite](https://vite.dev) 8
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [OxLint](https://oxc.rs) para linting
+- [Oxlint](https://oxc.rs) para o lint
 
 ## Como rodar
 
 ```bash
-npm ci            # instala as dependencias
+npm ci            # instala as dependências
 npm run dev       # servidor local (localhost:5173)
-npm run build     # gera a pasta dist/ para producao
-npm run lint      # roda o linter (oxlint)
-npm run preview   # pre-visualiza o build de producao
+npm run build     # gera a pasta dist/ para produção
+npm run lint      # roda o lint (oxlint)
+npm run preview   # mostra o build de produção localmente
 ```
 
-## Estrutura de pastas (src/)
+## Pastas de `src/`
 
 ```
 src/
-  assets/        — imagens e icones estaticos
-  components/    — componentes React (Hero, About, Projects, Skills, etc.)
-  data/          — dados do portfolio (resume.js, techIcons.js)
-  hooks/         — hooks customizados (useTheme, useActiveSection, useCounter)
-  i18n/          — internacionalizacao (translations.js, LanguageProvider, useLanguage)
-  lib/           — utilitarios (spotlight.js)
-  App.jsx        — componente raiz
-  main.jsx       — ponto de entrada
-  index.css      — design system (tokens, animacoes, tipografia)
+  assets/        imagens (hero.png) e ícones
+  components/    componentes React (Hero, About, Projects, Skills, ...)
+  data/          dados do portfólio (resume.js, techIcons.js)
+  hooks/         hooks próprios (useTheme, useActiveSection, useCounter)
+  i18n/          os três idiomas (translations.js, LanguageProvider, useLanguage)
+  lib/           utilitários (spotlight.js)
+  App.jsx        componente raiz
+  main.jsx       ponto de entrada
+  index.css      estilos e animações
 ```
